@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrowbrandIndia | Price Calculator</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #f8f9fa, #e0f7fa);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .panel {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .panel h2 {
+      color: #007bff;
+      margin-bottom: 15px;
+    }
+
+    .panel .happy-note {
+      background-color: #e6f4ea;
+      color: #2e7d32;
+      font-size: 14px;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .price {
+      font-size: 20px;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #28a745;
+    }
+
+    .icons {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #007bff;
+    }
+
+    @media (max-width: 480px) {
+      .panel {
+        padding: 20px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="panel">
+  <div class="icons"><i class="fas fa-star"></i> <i class="fas fa-heart"></i> <i class="fas fa-fire"></i></div>
+  <h2>Service Price Calculator</h2>
+
+  <div class="happy-note">
+    ✨ Special today: Instant delivery & top-quality guaranteed! ✨<br>
+    No password needed. Pay once, grow fast!
+  </div>
+
+  <select id="serviceType">
+    <option value="followers">👥 Instagram Followers</option>
+    <option value="reelviews">🎥 Reel Views</option>
+    <option value="postlikes">❤️ Post Likes</option>
+    <option value="reellikes">👍 Reel Likes</option>
+  </select>
+
+  <input type="number" id="quantity" placeholder="Enter quantity (e.g. 1000)">
+  <button onclick="calculateServicePrice()">Get Price</button>
+
+  <div id="output" class="price"></div>
+</div>
+
+<script>
+  function calculateServicePrice() {
+    const service = document.getElementById("serviceType").value;
+    const quantity = parseInt(document.getElementById("quantity").value);
+
+    if (!quantity || quantity <= 0) {
+      document.getElementById("output").innerHTML = "Please enter a valid quantity.";
+      return;
+    }
+
+    let pricePerUnit = 0;
+
+    switch(service) {
+      case "followers":
+        pricePerUnit = 0.50;
+        break;
+      case "reelviews":
+        pricePerUnit = 0.02;
+        break;
+      case "postlikes":
+        pricePerUnit = 0.03;
+        break;
+      case "reellikes":
+        pricePerUnit = 0.04;
+        break;
+    }
+
+    const totalPrice = quantity * pricePerUnit;
+    document.getElementById("output").innerHTML = `💰 Total Price: ₹${totalPrice.toFixed(2)}`;
+  }
+</script>
+
+</body>
+</html>
