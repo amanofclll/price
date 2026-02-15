@@ -1,147 +1,358 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GrowbrandIndia | Price Calculator</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrowbrandIndia | Premium Growth Panel</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --accent: #10b981;
+            --bg: #0f172a;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #f8f9fa, #e0f7fa);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      min-height: 100vh;
-    }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
 
-    .panel {
-      background: #ffffff;
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-    }
+        body {
+            background: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
 
-    .panel h2 {
-      color: #007bff;
-      margin-bottom: 15px;
-    }
+        .platform-wrapper {
+            width: 100%;
+            max-width: 480px;
+            position: relative;
+        }
 
-    .panel .happy-note {
-      background-color: #e6f4ea;
-      color: #2e7d32;
-      font-size: 14px;
-      padding: 10px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-    }
+        .main-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            position: relative;
+            z-index: 2;
+        }
 
-    select, input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-    }
+        .header { text-align: center; margin-bottom: 30px; }
+        .logo-box {
+            width: 65px; height: 65px;
+            background: linear-gradient(135deg, var(--primary), #a855f7);
+            border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 30px;
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
+        }
+        .header h1 { font-size: 26px; font-weight: 800; letter-spacing: -1px; margin-bottom: 5px; }
+        .live-status {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent);
+            padding: 6px 14px; border-radius: 50px;
+            font-size: 11px; font-weight: 700; text-transform: uppercase;
+        }
+        .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulse 1.5s infinite; }
 
-    button {
-      padding: 12px 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      width: 100%;
-    }
+        .service-selection { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 25px; }
+        .s-card {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            padding: 18px 10px; border-radius: 20px; text-align: center;
+            cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .s-card i { font-size: 22px; margin-bottom: 8px; display: block; color: var(--text-dim); }
+        .s-card span { font-size: 11px; font-weight: 700; display: block; }
+        .s-card.active {
+            background: var(--primary); border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+            transform: translateY(-4px);
+        }
+        .s-card.active i { color: white; }
 
-    button:hover {
-      background-color: #0056b3;
-    }
+        .input-group { margin-bottom: 20px; position: relative; }
+        .input-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-dim); margin: 0 0 8px 5px; }
+        .input-group input {
+            width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
+            padding: 16px 20px; border-radius: 18px; color: white; font-size: 18px; font-weight: 700;
+            transition: 0.3s;
+        }
+        .input-group input:focus { border-color: var(--primary); outline: none; background: rgba(0,0,0,0.4); }
 
-    .price {
-      font-size: 20px;
-      margin-top: 20px;
-      font-weight: bold;
-      color: #28a745;
-    }
+        /* Affiliate Promo UI */
+        .promo-status {
+            position: absolute; right: 15px; top: 38px;
+            font-size: 12px; font-weight: 800; display: none;
+        }
 
-    .icons {
-      font-size: 24px;
-      margin-bottom: 10px;
-      color: #007bff;
-    }
+        .reseller-toggle {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            padding: 15px 20px; border-radius: 20px; margin-bottom: 25px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .switch { position: relative; width: 44px; height: 24px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background: #334155; transition: .4s; border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+            background: white; transition: .4s; border-radius: 50%;
+        }
+        input:checked + .slider { background: var(--primary); }
+        input:checked + .slider:before { transform: translateX(20px); }
 
-    @media (max-width: 480px) {
-      .panel {
-        padding: 20px 15px;
-      }
-    }
-  </style>
+        .price-engine {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px; padding: 25px; text-align: center; margin-bottom: 25px;
+            position: relative; overflow: hidden;
+        }
+        .price-engine .label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim); }
+        .price-engine .val { font-size: 44px; font-weight: 800; color: #fff; margin: 5px 0; }
+        .profit-text { font-size: 13px; font-weight: 700; color: var(--accent); display: none; }
+        .discount-badge {
+            background: var(--accent); color: white; padding: 4px 10px;
+            border-radius: 6px; font-size: 11px; display: inline-block; margin-top: 5px;
+        }
+
+        .cta-btn {
+            width: 100%; padding: 18px; border-radius: 18px; border: none;
+            font-size: 16px; font-weight: 800; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            transition: 0.3s; margin-bottom: 12px;
+        }
+        .btn-wa { background: #25D366; color: white; }
+        .btn-wa:hover { background: #1ebc57; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
+        
+        .btn-copy { background: transparent; border: 1px solid var(--glass-border); color: white; display: none; }
+        .btn-copy:hover { background: var(--glass); }
+
+        .trust-scroll {
+            margin-top: 25px; overflow: hidden; white-space: nowrap; 
+            padding: 10px 0; border-top: 1px solid var(--glass-border);
+        }
+        .trust-item {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 11px; font-weight: 600; color: var(--text-dim);
+            margin-right: 30px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @media (max-width: 400px) {
+            .main-card { padding: 20px; }
+            .price-engine .val { font-size: 36px; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="panel">
-  <div class="icons"><i class="fas fa-star"></i> <i class="fas fa-heart"></i> <i class="fas fa-fire"></i></div>
-  <h2>Service Price Calculator</h2>
+<div class="platform-wrapper">
+    <div class="main-card">
+        <header class="header">
+            <div class="logo-box"><i class="fas fa-chart-line"></i></div>
+            <h1>GrowbrandIndia</h1>
+            <div class="live-status">
+                <span class="dot"></span>
+                Instant Delivery Active
+            </div>
+        </header>
 
-  <div class="happy-note">
-    ✨ Special today: Instant delivery & top-quality guaranteed! ✨<br>
-    No password needed. Pay once, grow fast!
-  </div>
+        <div class="service-selection">
+            <div class="s-card active" onclick="updateService('followers', 500, this)">
+                <i class="fab fa-instagram"></i>
+                <span>Followers</span>
+            </div>
+            <div class="s-card" onclick="updateService('reelviews', 250, this)">
+                <i class="fas fa-play"></i>
+                <span>Views</span>
+            </div>
+            <div class="s-card" onclick="updateService('likes', 80, this)">
+                <i class="fas fa-heart"></i>
+                <span>Likes</span>
+            </div>
+        </div>
 
-  <select id="serviceType">
-    <option value="followers">👥 Instagram Followers</option>
-    <option value="reelviews">🎥 Reel Views</option>
-    <option value="postlikes">❤️ Post Likes</option>
-    <option value="reellikes">👍 Reel Likes</option>
-  </select>
+        <div class="input-group">
+            <label>ENTER QUANTITY</label>
+            <input type="number" id="qtyInput" placeholder="Minimum 100" oninput="runEngine()">
+        </div>
 
-  <input type="number" id="quantity" placeholder="Enter quantity (e.g. 1000)">
-  <button onclick="calculateServicePrice()">Get Price</button>
+        <div class="input-group">
+            <label>PROMO CODE (AFFILIATE)</label>
+            <input type="text" id="promoInput" placeholder="Enter Influencer Code" oninput="runEngine()">
+            <div id="promoStatus" class="promo-status"></div>
+        </div>
 
-  <div id="output" class="price"></div>
+        <div class="reseller-toggle">
+            <div>
+                <p style="font-size: 14px; font-weight: 700;">Reseller Mode</p>
+                <p style="font-size: 10px; color: var(--text-dim);">Set your own pricing profit</p>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="resellerCheck" onchange="toggleReseller()">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div id="resellerConfig" style="display: none; margin-bottom: 20px;">
+            <div class="input-group">
+                <label>YOUR PROFIT MARGIN (%)</label>
+                <input type="number" id="profitMargin" value="25" oninput="runEngine()">
+            </div>
+        </div>
+
+        <div class="price-engine">
+            <div class="label" id="priceLabel">Total Payable</div>
+            <div class="val" id="totalPriceDisplay">₹0.00</div>
+            <div id="discountTag" style="display:none;">
+                <span class="discount-badge">15% Affiliate Discount Applied</span>
+            </div>
+            <div class="profit-text" id="profitDisplay">+₹0.00 Profit</div>
+        </div>
+
+        <div class="actions">
+            <button class="cta-btn btn-wa" onclick="triggerWhatsApp()">
+                <i class="fab fa-whatsapp"></i> ORDER VIA WHATSAPP
+            </button>
+            <button class="cta-btn btn-copy" id="copyQuoteBtn" onclick="copyToClipboard()">
+                <i class="fas fa-copy"></i> COPY CLIENT QUOTE
+            </button>
+        </div>
+
+        <div class="trust-scroll">
+            <div class="trust-item"><i class="fas fa-check-circle" style="color:var(--accent)"></i> 100% Secure</div>
+            <div class="trust-item"><i class="fas fa-bolt" style="color:#fbbf24"></i> Instant Start</div>
+            <div class="trust-item"><i class="fas fa-headset" style="color:var(--primary)"></i> 24/7 Support</div>
+            <div class="trust-item"><i class="fas fa-shield" style="color:var(--accent)"></i> Non-Drop Quality</div>
+        </div>
+    </div>
 </div>
 
 <script>
-  function calculateServicePrice() {
-    const service = document.getElementById("serviceType").value;
-    const quantity = parseInt(document.getElementById("quantity").value);
+    const CONFIG = {
+        WHATSAPP_NUMBER: "919876543210", 
+        ACTIVE_RATE: 500,
+        ACTIVE_NAME: "Instagram Followers",
+        // LIST YOUR AFFILIATE CODES HERE
+        VALID_CODES: ["AK15", "RIYA15", "RAHUL15", "GROW15"],
+        DISCOUNT_PERCENT: 15
+    };
 
-    if (!quantity || quantity <= 0) {
-      document.getElementById("output").innerHTML = "Please enter a valid quantity.";
-      return;
+    function updateService(type, rate, element) {
+        CONFIG.ACTIVE_RATE = rate;
+        CONFIG.ACTIVE_NAME = element.querySelector('span').innerText;
+        document.querySelectorAll('.s-card').forEach(card => card.classList.remove('active'));
+        element.classList.add('active');
+        runEngine();
     }
 
-    let pricePerUnit = 0;
-
-    switch(service) {
-      case "followers":
-        pricePerUnit = 0.50;
-        break;
-      case "reelviews":
-        pricePerUnit = 0.02;
-        break;
-      case "postlikes":
-        pricePerUnit = 0.03;
-        break;
-      case "reellikes":
-        pricePerUnit = 0.04;
-        break;
+    function toggleReseller() {
+        const isChecked = document.getElementById('resellerCheck').checked;
+        document.getElementById('resellerConfig').style.display = isChecked ? 'block' : 'none';
+        document.getElementById('profitDisplay').style.display = isChecked ? 'block' : 'none';
+        document.getElementById('copyQuoteBtn').style.display = isChecked ? 'flex' : 'none';
+        document.getElementById('priceLabel').innerText = isChecked ? "Client Quote Amount" : "Total Payable";
+        runEngine();
     }
 
-    const totalPrice = quantity * pricePerUnit;
-    document.getElementById("output").innerHTML = `💰 Total Price: ₹${totalPrice.toFixed(2)}`;
-  }
+    function runEngine() {
+        const qty = parseFloat(document.getElementById('qtyInput').value) || 0;
+        const margin = parseFloat(document.getElementById('profitMargin').value) || 0;
+        const isReseller = document.getElementById('resellerCheck').checked;
+        const promo = document.getElementById('promoInput').value.toUpperCase().trim();
+        
+        let basePrice = (qty / 1000) * CONFIG.ACTIVE_RATE;
+        let isPromoValid = CONFIG.VALID_CODES.includes(promo);
+
+        // UI Promo Status
+        const statusEl = document.getElementById('promoStatus');
+        const discTag = document.getElementById('discountTag');
+        if(promo.length > 0) {
+            statusEl.style.display = "block";
+            if(isPromoValid) {
+                statusEl.innerText = "✓ VALID";
+                statusEl.style.color = "#10b981";
+                discTag.style.display = "block";
+                // Apply 15% Discount
+                basePrice = basePrice * (1 - (CONFIG.DISCOUNT_PERCENT / 100));
+            } else {
+                statusEl.innerText = "× INVALID";
+                statusEl.style.color = "#ef4444";
+                discTag.style.display = "none";
+            }
+        } else {
+            statusEl.style.display = "none";
+            discTag.style.display = "none";
+        }
+
+        const profit = basePrice * (margin / 100);
+        const finalQuote = isReseller ? (basePrice + profit) : basePrice;
+
+        document.getElementById('totalPriceDisplay').innerText = `₹${finalQuote.toLocaleString('en-IN', {minimumFractionDigits: 2})}`;
+        document.getElementById('profitDisplay').innerText = `Your Profit: +₹${profit.toFixed(2)}`;
+
+        window.currentOrder = {
+            qty: qty,
+            service: CONFIG.ACTIVE_NAME,
+            base: basePrice.toFixed(2),
+            quote: finalQuote.toFixed(2),
+            promo: isPromoValid ? promo : "NONE"
+        };
+    }
+
+    function triggerWhatsApp() {
+        if(!window.currentOrder || window.currentOrder.qty < 10) {
+            return alert("Please enter a valid quantity first!");
+        }
+        
+        const text = `🚀 *NEW ORDER - GROWBRANDINDIA*%0A` +
+                     `----------------------------%0A` +
+                     `📦 *Service:* ${window.currentOrder.service}%0A` +
+                     `🔢 *Quantity:* ${window.currentOrder.qty}%0A` +
+                     `💰 *Price:* ₹${window.currentOrder.base}%0A` +
+                     `🎫 *Promo:* ${window.currentOrder.promo}%0A` +
+                     `----------------------------%0A` +
+                     `Please share payment details for immediate start!`;
+        
+        window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${text}`, '_blank');
+    }
+
+    function copyToClipboard() {
+        const quote = `✨ *Professional Growth Quote* ✨\n\n` +
+                      `✅ *Service:* ${window.currentOrder.service}\n` +
+                      `🔢 *Quantity:* ${window.currentOrder.qty}\n` +
+                      `💵 *Total Price:* ₹${window.currentOrder.quote}\n` +
+                      `🚀 *Status:* Ready to Start\n\n` +
+                      `Reply with "YES" to proceed!`;
+        
+        navigator.clipboard.writeText(quote).then(() => {
+            const btn = document.getElementById('copyQuoteBtn');
+            const oldHtml = btn.innerHTML;
+            btn.innerHTML = `<i class="fas fa-check"></i> COPIED TO CLIPBOARD`;
+            setTimeout(() => { btn.innerHTML = oldHtml; }, 2000);
+        });
+    }
+
+    runEngine();
 </script>
 
 </body>
