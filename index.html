@@ -30,11 +30,7 @@
             overflow-x: hidden;
         }
 
-        .platform-wrapper {
-            width: 100%;
-            max-width: 480px;
-            position: relative;
-        }
+        .platform-wrapper { width: 100%; max-width: 480px; position: relative; }
 
         .main-card {
             background: rgba(30, 41, 59, 0.6);
@@ -53,196 +49,131 @@
             background: linear-gradient(135deg, var(--primary), #a855f7);
             border-radius: 20px;
             display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 30px;
+            margin: 0 auto 15px; font-size: 30px;
             box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
         }
         .header h1 { font-size: 26px; font-weight: 800; letter-spacing: -1px; margin-bottom: 5px; }
         .live-status {
             display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--accent);
+            background: rgba(16, 185, 129, 0.1); color: var(--accent);
             padding: 6px 14px; border-radius: 50px;
             font-size: 11px; font-weight: 700; text-transform: uppercase;
         }
         .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; animation: pulse 1.5s infinite; }
 
+        /* Service Cards */
         .service-selection { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 25px; }
         .s-card {
             background: var(--glass); border: 1px solid var(--glass-border);
             padding: 18px 10px; border-radius: 20px; text-align: center;
-            cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer; transition: 0.3s;
         }
-        .s-card i { font-size: 22px; margin-bottom: 8px; display: block; color: var(--text-dim); }
-        .s-card span { font-size: 11px; font-weight: 700; display: block; }
-        .s-card.active {
-            background: var(--primary); border-color: var(--primary);
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
-            transform: translateY(-4px);
-        }
-        .s-card.active i { color: white; }
+        .s-card.active { background: var(--primary); border-color: var(--primary); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3); transform: translateY(-4px); }
+        .s-card span { font-size: 11px; font-weight: 700; display: block; margin-top: 5px;}
 
+        /* Inputs & Presets */
         .input-group { margin-bottom: 20px; position: relative; }
-        .input-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-dim); margin: 0 0 8px 5px; }
+        .input-group label { display: block; font-size: 11px; font-weight: 700; color: var(--text-dim); margin: 0 0 8px 5px; letter-spacing: 1px; }
         .input-group input {
             width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
             padding: 16px 20px; border-radius: 18px; color: white; font-size: 18px; font-weight: 700;
-            transition: 0.3s;
         }
-        .input-group input:focus { border-color: var(--primary); outline: none; background: rgba(0,0,0,0.4); }
+        .presets { display: flex; gap: 8px; margin-top: 10px; }
+        .p-btn { 
+            flex: 1; padding: 8px; background: var(--glass); border: 1px solid var(--glass-border); 
+            border-radius: 10px; color: var(--text-dim); font-size: 11px; font-weight: 700; cursor: pointer;
+        }
+        .p-btn:hover { border-color: var(--primary); color: white; }
 
-        /* Affiliate Promo UI */
-        .promo-status {
-            position: absolute; right: 15px; top: 38px;
-            font-size: 12px; font-weight: 800; display: none;
-        }
-
-        .reseller-toggle {
-            background: var(--glass); border: 1px solid var(--glass-border);
-            padding: 15px 20px; border-radius: 20px; margin-bottom: 25px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .switch { position: relative; width: 44px; height: 24px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider {
-            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-            background: #334155; transition: .4s; border-radius: 34px;
-        }
-        .slider:before {
-            position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
-            background: white; transition: .4s; border-radius: 50%;
-        }
-        input:checked + .slider { background: var(--primary); }
-        input:checked + .slider:before { transform: translateX(20px); }
-
+        /* Pricing Display */
         .price-engine {
             background: linear-gradient(135deg, #1e293b, #0f172a);
             border: 1px solid var(--glass-border);
             border-radius: 24px; padding: 25px; text-align: center; margin-bottom: 25px;
-            position: relative; overflow: hidden;
         }
-        .price-engine .label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim); }
-        .price-engine .val { font-size: 44px; font-weight: 800; color: #fff; margin: 5px 0; }
-        .profit-text { font-size: 13px; font-weight: 700; color: var(--accent); display: none; }
-        .discount-badge {
-            background: var(--accent); color: white; padding: 4px 10px;
-            border-radius: 6px; font-size: 11px; display: inline-block; margin-top: 5px;
-        }
+        .price-engine .val { font-size: 44px; font-weight: 800; color: #fff; }
+        .discount-badge { background: var(--accent); color: white; padding: 4px 10px; border-radius: 6px; font-size: 11px; margin-top: 10px; display: inline-block; }
 
+        /* Buttons */
         .cta-btn {
             width: 100%; padding: 18px; border-radius: 18px; border: none;
             font-size: 16px; font-weight: 800; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 12px;
-            transition: 0.3s; margin-bottom: 12px;
+            display: flex; align-items: center; justify-content: center; gap: 12px; transition: 0.3s;
         }
-        .btn-wa { background: #25D366; color: white; }
-        .btn-wa:hover { background: #1ebc57; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
-        
-        .btn-copy { background: transparent; border: 1px solid var(--glass-border); color: white; display: none; }
-        .btn-copy:hover { background: var(--glass); }
+        .btn-wa { background: #25D366; color: white; margin-bottom: 12px; }
+        .guarantee-row { display: flex; justify-content: center; gap: 15px; margin-top: 15px; font-size: 10px; color: var(--text-dim); }
 
-        .trust-scroll {
-            margin-top: 25px; overflow: hidden; white-space: nowrap; 
-            padding: 10px 0; border-top: 1px solid var(--glass-border);
-        }
-        .trust-item {
-            display: inline-flex; align-items: center; gap: 6px;
-            font-size: 11px; font-weight: 600; color: var(--text-dim);
-            margin-right: 30px;
+        /* Notification Toast */
+        #notification-toast {
+            position: fixed; bottom: 20px; left: 20px;
+            background: white; color: #333; padding: 12px 20px;
+            border-radius: 15px; display: flex; align-items: center; gap: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transform: translateY(150%); transition: 0.5s; z-index: 999;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.3); opacity: 0.5; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        @media (max-width: 400px) {
-            .main-card { padding: 20px; }
-            .price-engine .val { font-size: 36px; }
-        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
 
+<div id="notification-toast">
+    <div style="background: #e0e7ff; width:35px; height:35px; border-radius:50%; display:flex; align-items:center; justify-content:center;">
+        <i class="fab fa-instagram" style="color: var(--primary);"></i>
+    </div>
+    <div id="toast-text" style="font-size: 12px; font-weight: 600;">Someone just ordered 5k Followers!</div>
+</div>
+
 <div class="platform-wrapper">
     <div class="main-card">
         <header class="header">
-            <div class="logo-box"><i class="fas fa-chart-line"></i></div>
+            <div class="logo-box"><i class="fas fa-rocket"></i></div>
             <h1>GrowbrandIndia</h1>
-            <div class="live-status">
-                <span class="dot"></span>
-                Instant Delivery Active
-            </div>
+            <div class="live-status"><span class="dot"></span> 24 Orders in last 1 hour</div>
         </header>
 
         <div class="service-selection">
             <div class="s-card active" onclick="updateService('followers', 500, this)">
-                <i class="fab fa-instagram"></i>
-                <span>Followers</span>
+                <i class="fab fa-instagram"></i><span>Followers</span>
             </div>
             <div class="s-card" onclick="updateService('reelviews', 250, this)">
-                <i class="fas fa-play"></i>
-                <span>Views</span>
+                <i class="fas fa-play"></i><span>Views</span>
             </div>
             <div class="s-card" onclick="updateService('likes', 80, this)">
-                <i class="fas fa-heart"></i>
-                <span>Likes</span>
+                <i class="fas fa-heart"></i><span>Likes</span>
             </div>
         </div>
 
         <div class="input-group">
-            <label>ENTER QUANTITY</label>
-            <input type="number" id="qtyInput" placeholder="Minimum 100" oninput="runEngine()">
+            <label>CHOOSE QUANTITY</label>
+            <input type="number" id="qtyInput" placeholder="Enter amount" oninput="runEngine()">
+            <div class="presets">
+                <div class="p-btn" onclick="setQty(1000)">1,000</div>
+                <div class="p-btn" onclick="setQty(5000)">5,000</div>
+                <div class="p-btn" onclick="setQty(10000)">10,000</div>
+            </div>
         </div>
 
         <div class="input-group">
-            <label>PROMO CODE (AFFILIATE)</label>
-            <input type="text" id="promoInput" placeholder="Enter Influencer Code" oninput="runEngine()">
-            <div id="promoStatus" class="promo-status"></div>
-        </div>
-
-        <div class="reseller-toggle">
-            <div>
-                <p style="font-size: 14px; font-weight: 700;">Reseller Mode</p>
-                <p style="font-size: 10px; color: var(--text-dim);">Set your own pricing profit</p>
-            </div>
-            <label class="switch">
-                <input type="checkbox" id="resellerCheck" onchange="toggleReseller()">
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <div id="resellerConfig" style="display: none; margin-bottom: 20px;">
-            <div class="input-group">
-                <label>YOUR PROFIT MARGIN (%)</label>
-                <input type="number" id="profitMargin" value="25" oninput="runEngine()">
-            </div>
+            <label>PROMO CODE</label>
+            <input type="text" id="promoInput" placeholder="Optional" oninput="runEngine()">
+            <div id="promoStatus" style="position:absolute; right:15px; top:38px; font-size:10px; font-weight:800;"></div>
         </div>
 
         <div class="price-engine">
-            <div class="label" id="priceLabel">Total Payable</div>
+            <div class="label" style="font-size:11px; opacity:0.6;">FINAL INVESTMENT</div>
             <div class="val" id="totalPriceDisplay">₹0.00</div>
-            <div id="discountTag" style="display:none;">
-                <span class="discount-badge">15% Affiliate Discount Applied</span>
-            </div>
-            <div class="profit-text" id="profitDisplay">+₹0.00 Profit</div>
+            <div id="discountTag" style="display:none;"><span class="discount-badge">Affiliate Discount Applied</span></div>
         </div>
 
-        <div class="actions">
-            <button class="cta-btn btn-wa" onclick="triggerWhatsApp()">
-                <i class="fab fa-whatsapp"></i> ORDER VIA WHATSAPP
-            </button>
-            <button class="cta-btn btn-copy" id="copyQuoteBtn" onclick="copyToClipboard()">
-                <i class="fas fa-copy"></i> COPY CLIENT QUOTE
-            </button>
-        </div>
+        <button class="cta-btn btn-wa" onclick="triggerWhatsApp()">
+            <i class="fab fa-whatsapp"></i> START ORDER NOW
+        </button>
 
-        <div class="trust-scroll">
-            <div class="trust-item"><i class="fas fa-check-circle" style="color:var(--accent)"></i> 100% Secure</div>
-            <div class="trust-item"><i class="fas fa-bolt" style="color:#fbbf24"></i> Instant Start</div>
-            <div class="trust-item"><i class="fas fa-headset" style="color:var(--primary)"></i> 24/7 Support</div>
-            <div class="trust-item"><i class="fas fa-shield" style="color:var(--accent)"></i> Non-Drop Quality</div>
+        <div class="guarantee-row">
+            <span><i class="fas fa-shield-alt" style="color:var(--accent)"></i> Non-Drop</span>
+            <span><i class="fas fa-bolt" style="color:#fbbf24"></i> Instant Start</span>
+            <span><i class="fas fa-lock"></i> No Password</span>
         </div>
     </div>
 </div>
@@ -252,10 +183,10 @@
         WHATSAPP_NUMBER: "918826155917", 
         ACTIVE_RATE: 500,
         ACTIVE_NAME: "Instagram Followers",
-        // LIST YOUR AFFILIATE CODES HERE
-        VALID_CODES: ["AK15", "RIYA15", "RAHUL15", "GROW15"],
-        DISCOUNT_PERCENT: 15
+        AFFILIATES: { "AK15": 15, "RIYA15": 15, "GROW15": 15, "TEST": 50 }
     };
+
+    function setQty(val) { document.getElementById('qtyInput').value = val; runEngine(); }
 
     function updateService(type, rate, element) {
         CONFIG.ACTIVE_RATE = rate;
@@ -265,95 +196,54 @@
         runEngine();
     }
 
-    function toggleReseller() {
-        const isChecked = document.getElementById('resellerCheck').checked;
-        document.getElementById('resellerConfig').style.display = isChecked ? 'block' : 'none';
-        document.getElementById('profitDisplay').style.display = isChecked ? 'block' : 'none';
-        document.getElementById('copyQuoteBtn').style.display = isChecked ? 'flex' : 'none';
-        document.getElementById('priceLabel').innerText = isChecked ? "Client Quote Amount" : "Total Payable";
-        runEngine();
-    }
-
     function runEngine() {
         const qty = parseFloat(document.getElementById('qtyInput').value) || 0;
-        const margin = parseFloat(document.getElementById('profitMargin').value) || 0;
-        const isReseller = document.getElementById('resellerCheck').checked;
         const promo = document.getElementById('promoInput').value.toUpperCase().trim();
-        
-        let basePrice = (qty / 1000) * CONFIG.ACTIVE_RATE;
-        let isPromoValid = CONFIG.VALID_CODES.includes(promo);
+        let originalPrice = (qty / 1000) * CONFIG.ACTIVE_RATE;
+        let finalPrice = originalPrice;
+        let disc = 0;
 
-        // UI Promo Status
-        const statusEl = document.getElementById('promoStatus');
-        const discTag = document.getElementById('discountTag');
-        if(promo.length > 0) {
-            statusEl.style.display = "block";
-            if(isPromoValid) {
-                statusEl.innerText = "✓ VALID";
-                statusEl.style.color = "#10b981";
-                discTag.style.display = "block";
-                // Apply 15% Discount
-                basePrice = basePrice * (1 - (CONFIG.DISCOUNT_PERCENT / 100));
-            } else {
-                statusEl.innerText = "× INVALID";
-                statusEl.style.color = "#ef4444";
-                discTag.style.display = "none";
-            }
+        if(CONFIG.AFFILIATES[promo]) {
+            disc = CONFIG.AFFILIATES[promo];
+            finalPrice = originalPrice * (1 - (disc/100));
+            document.getElementById('promoStatus').innerText = "✓ APPLIED";
+            document.getElementById('promoStatus').style.color = "#10b981";
+            document.getElementById('discountTag').style.display = "block";
         } else {
-            statusEl.style.display = "none";
-            discTag.style.display = "none";
+            document.getElementById('promoStatus').innerText = promo ? "× INVALID" : "";
+            document.getElementById('promoStatus').style.color = "#ef4444";
+            document.getElementById('discountTag').style.display = "none";
         }
 
-        const profit = basePrice * (margin / 100);
-        const finalQuote = isReseller ? (basePrice + profit) : basePrice;
+        document.getElementById('totalPriceDisplay').innerHTML = disc > 0 ? 
+            `<span style="text-decoration:line-through; font-size:18px; opacity:0.3; margin-right:10px;">₹${originalPrice.toFixed(0)}</span>₹${finalPrice.toFixed(2)}` : 
+            `₹${finalPrice.toLocaleString('en-IN', {minimumFractionDigits: 2})}`;
 
-        document.getElementById('totalPriceDisplay').innerText = `₹${finalQuote.toLocaleString('en-IN', {minimumFractionDigits: 2})}`;
-        document.getElementById('profitDisplay').innerText = `Your Profit: +₹${profit.toFixed(2)}`;
-
-        window.currentOrder = {
-            qty: qty,
-            service: CONFIG.ACTIVE_NAME,
-            base: basePrice.toFixed(2),
-            quote: finalQuote.toFixed(2),
-            promo: isPromoValid ? promo : "NONE"
-        };
+        window.order = { qty, service: CONFIG.ACTIVE_NAME, price: finalPrice.toFixed(2), promo: disc > 0 ? promo : "NONE" };
     }
 
     function triggerWhatsApp() {
-        if(!window.currentOrder || window.currentOrder.qty < 10) {
-            return alert("Please enter a valid quantity first!");
-        }
-        
-        const text = `🚀 *NEW ORDER - GROWBRANDINDIA*%0A` +
-                     `----------------------------%0A` +
-                     `📦 *Service:* ${window.currentOrder.service}%0A` +
-                     `🔢 *Quantity:* ${window.currentOrder.qty}%0A` +
-                     `💰 *Price:* ₹${window.currentOrder.base}%0A` +
-                     `🎫 *Promo:* ${window.currentOrder.promo}%0A` +
-                     `----------------------------%0A` +
-                     `Please share payment details for immediate start!`;
-        
-        window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${text}`, '_blank');
+        if(!window.order || window.order.qty <= 0) return alert("Enter quantity");
+        const text = `🚀 *NEW ORDER*%0A📦 *Service:* ${window.order.service}%0A🔢 *Qty:* ${window.order.qty}%0A💰 *Price:* ₹${window.order.price}%0A🎫 *Promo:* ${window.order.promo}`;
+        window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${text}`);
     }
 
-    function copyToClipboard() {
-        const quote = `✨ *Professional Growth Quote* ✨\n\n` +
-                      `✅ *Service:* ${window.currentOrder.service}\n` +
-                      `🔢 *Quantity:* ${window.currentOrder.qty}\n` +
-                      `💵 *Total Price:* ₹${window.currentOrder.quote}\n` +
-                      `🚀 *Status:* Ready to Start\n\n` +
-                      `Reply with "YES" to proceed!`;
-        
-        navigator.clipboard.writeText(quote).then(() => {
-            const btn = document.getElementById('copyQuoteBtn');
-            const oldHtml = btn.innerHTML;
-            btn.innerHTML = `<i class="fas fa-check"></i> COPIED TO CLIPBOARD`;
-            setTimeout(() => { btn.innerHTML = oldHtml; }, 2000);
-        });
+    // Live Notification System
+    const locations = ["Mumbai", "Delhi", "Bangalore", "Chennai", "Kolkata", "Pune"];
+    const orders = ["1k Followers", "5k Views", "500 Likes", "10k Followers"];
+    
+    function showNotification() {
+        const loc = locations[Math.floor(Math.random()*locations.length)];
+        const ord = orders[Math.floor(Math.random()*orders.length)];
+        document.getElementById('toast-text').innerText = `Someone from ${loc} just ordered ${ord}!`;
+        const toast = document.getElementById('notification-toast');
+        toast.style.transform = "translateY(0)";
+        setTimeout(() => { toast.style.transform = "translateY(150%)"; }, 4000);
     }
+    setInterval(showNotification, 12000);
+    setTimeout(showNotification, 3000);
 
     runEngine();
 </script>
-
 </body>
 </html>
